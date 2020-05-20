@@ -5,12 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var graphqlHTTP = require('express-graphql');
-var schema = require('./graphql/LogoSchemas.js');
+var schema = require('./graphql/LogoSchemas');
 var cors = require('cors');
 
-mongoose.connect('mongodb://localhost/node-graphql', {promiseLibrary: require('bluebird'), useNewUrlParser: true})
-  .then(() => console.log("connection succesful"))
-  .catch((err) => console.log(err));
+mongoose.connect('mongodb://localhost/node-graphql', { promiseLibrary: require('bluebird'), useNewUrlParser: true })
+  .then(() =>  console.log('connection successful'))
+  .catch((err) => console.error(err));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,7 +19,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -33,8 +33,8 @@ app.use('*', cors());
 app.use('/graphql', cors(), graphqlHTTP({
   schema: schema,
   rootValue: global,
-  graphiql: true
-}))
+  graphiql: true,
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

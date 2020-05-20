@@ -18,6 +18,12 @@ var logoType = new GraphQLObjectType({
             text: {
                 type: GraphQLString
             },
+            height: {
+                type: GraphQLInt
+            },
+            width: {
+                type: GraphQLInt
+            },
             color: {
                 type: GraphQLString
             },
@@ -93,6 +99,12 @@ var mutation = new GraphQLObjectType({
                     text: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
+                    height: {
+                        type: new GraphQLNonNull(GraphQLInt)
+                    },
+                    width: {
+                        type: new GraphQLNonNull(GraphQLInt)
+                    },
                     color: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
@@ -137,6 +149,12 @@ var mutation = new GraphQLObjectType({
                     text: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
+                    height: {
+                        type: new GraphQLNonNull(GraphQLInt)
+                    },
+                    width: {
+                        type: new GraphQLNonNull(GraphQLInt)
+                    },
                     color: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
@@ -163,8 +181,8 @@ var mutation = new GraphQLObjectType({
                     }
                 },
                 resolve(root, params) {
-                    return LogoModel.findByIdAndUpdate(params.id, { text: params.text, color: params.color, 
-                        fontSize: params.fontSize, bgcolor: params.bgcolor, brcolor: params.brcolor, 
+                    return LogoModel.findByIdAndUpdate(params.id, { text: params.text, height: params.height, width: params.width, 
+                        color: params.color, fontSize: params.fontSize, bgcolor: params.bgcolor, brcolor: params.brcolor, 
                         brradius: params.brradius, brwidth: params.brwidth, padding: params.padding, 
                         margin: params.margin, lastUpdate: new Date() }, function (err) {
                         if (err) return next(err);
